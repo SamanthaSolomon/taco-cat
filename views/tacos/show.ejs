@@ -11,7 +11,12 @@
         Make taco <%= taco.tasty ? "not tasty 🌮 🥺" : "tasty 🌮 🎉" %> 
       </button>
     </form> 
-  <% } %>  
+  <% } %> 
+  <% if (taco.owner.equals(user?.profile._id)) { %>
+  <form action="/tacos/<%= taco._id %>/edit" method="GET">
+    <button class="btn" type="submit">Edit this taco 🌮 🚧</button>
+  </form>
+  <% } %> 
 </section>
 
 <%- include("../partials/footer") %> 

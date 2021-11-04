@@ -60,11 +60,48 @@ function flipTasty(req, res){
   })
 }
 
+function edit(req, res) {
+  Taco.findById(req.params.id)
+  .then(taco => {
+    res.render('tacos/edit', {
+      taco,
+      title: "edit 🌮"
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/tacos')
+  })
+}
 
+function update(req, res){
+  Taco.findById(req.params.id)
+  .then(taco => {
+    if (taco.owner.equals(req.user.profile._id)) {
+      //the person that created the taco can edit
+      req.body.tasty = !!req.body.tasty
+      taco.updateOne(req.body, {new: true})
+      //without new:true will be not updated taco document
+      .then(()=> {
+        res.redirect(`/tacos/${taco._id}`)
+      })
+    } else {
+      //everyone else cannot
+      throw new Error ('🚫 Not authorized 🚫')
+    }
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect(`/tacos`)
+  })
+
+}
 
 export {
   index,
   create,
   show,
-  flipTasty
+  flipTasty,
+  edit,
+  update
 }
