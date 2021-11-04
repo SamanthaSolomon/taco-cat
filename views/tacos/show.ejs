@@ -16,6 +16,9 @@
   <form action="/tacos/<%= taco._id %>/edit" method="GET">
     <button class="btn" type="submit">Edit this taco 🌮 🚧</button>
   </form>
+  <form action="/tacos/<%= taco._id %>?_method=Delete" method="POST">
+    <button class="btn" type ="submit"> Delete this taco  🌮 💀 </button>
+  </form> 
   <% } %> 
 </section>
 

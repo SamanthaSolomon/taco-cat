@@ -21,6 +21,8 @@ router.patch('/:id/flip-tasty', isLoggedIn, tacosCtrl.flipTasty)
 //tacos/:id
 router.put("/:id", isLoggedIn, tacosCtrl.update)
 
+//tacos/:id
+router.delete('/:id', isLoggedIn, tacosCtrl.delete)
 
 export {
   router
